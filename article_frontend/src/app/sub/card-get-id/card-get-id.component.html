@@ -1,0 +1,16 @@
+<div id="container">
+    <div id="card">
+        <div id="title">Get Article by ID</div>
+        <input type="text" #id placeholder="ID">
+        <div id="buttons">
+            <button type="button" (click)="submit(id.value)">Submit</button>
+            <button id="clear" type="button" (click)="clear()">Clear</button>
+        </div>
+    </div>
+    <div id="json-output">
+        <p>Requested Item</p>
+        <div id="name">Name:<div>{{ data["name"] | json }}</div></div>
+        <div id="description">Description:<div>{{ data["description"] | json }}</div></div>
+        <div id="quantity">Quantity:<div>{{ data["quantity"] | json }}</div></div>
+    </div>
+</div>

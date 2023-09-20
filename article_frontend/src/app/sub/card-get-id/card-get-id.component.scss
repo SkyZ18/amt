@@ -1,0 +1,84 @@
+#container {
+    display: flex;
+
+    #card {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        height: 500px;
+        width: 800px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+    
+        #title {
+            font-size: 45px;
+            font-weight: bold;
+            color: white;
+            padding-bottom: 70px;
+        }
+    
+        input {
+            width: 500px;
+            height: 45px;
+            border-radius: 15px;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            padding-left: 10px;
+        }
+    
+        input:focus {
+            outline: none!important;
+        }
+
+        #buttons {
+            display: flex;
+
+            #clear {
+                margin-left: 70px;
+                color: white;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            button {
+                width: 150px;
+                height: 50px;
+                border-radius: 15px;
+                margin-top: 50px;
+                background: linear-gradient(270deg, rgba(9,9,121,1) 26%, rgba(0,212,255,1) 100%);
+                cursor: pointer;
+                color: white;
+                font-weight: bold;
+                font-size: 20px;
+            }
+        }
+    
+    }
+    
+    #json-output {
+        height: 500px;
+        width: 600px;
+        margin-left: 100px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+
+        p {
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+            padding: 5px;
+            margin-left: 20px;
+            margin-top: 40px;
+            text-decoration: underline;
+        }
+
+        div {
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+            padding: 5px;
+            margin-left: 20px;
+        }
+    }
+}

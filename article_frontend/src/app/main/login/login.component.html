@@ -1,0 +1,20 @@
+<div id="banner">
+    <div id="card">
+        <div id="card-content">
+            <div id="title">Login</div>
+            <div id="inputs">
+                <input type="email" placeholder="email or username" #email required>
+                <input type="password" placeholder="password" #password required>
+            </div>
+            <div id="check">
+                <label class="container">Remember me
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div id="btn">
+                <button type="button" id="submit" (click)="submit(email.value, password.value)">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

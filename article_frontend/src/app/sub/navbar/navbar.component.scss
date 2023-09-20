@@ -1,0 +1,38 @@
+#navbar {
+    background-color: rgba(54, 4, 127, 0.5);
+    min-height: 110px;
+    
+    #title {
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        line-height: 110px;
+        padding: 0 100px;
+    }
+
+    ul {
+        list-style: none;
+        float: right;
+        padding-right: 100px;
+        line-height: 80px;
+
+        li {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 20px;
+
+            a {
+                text-decoration: none;
+                color: white;
+                padding: 9px;
+            }
+
+            a:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+
+        
+    }
+}

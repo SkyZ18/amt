@@ -1,0 +1,17 @@
+<div id="container">
+    <form>
+        <div id="card">
+            <div id="title">Post new Article</div>
+            <input type="text" #name placeholder="Name" required>
+            <input type="text" #description placeholder="Description" required>
+            <input type="text" #quantity placeholder="Quantity" required>
+            <div id="buttons">
+                <button type="button" (click)="submit(name.value, description.value, quantity.value)">Submit</button>
+            </div>
+        </div>
+    </form>
+    <div id="json-output">
+        <div id="title_r">Request status:</div>
+        <div>{{ data['status'] | json }}</div>
+    </div>
+</div>

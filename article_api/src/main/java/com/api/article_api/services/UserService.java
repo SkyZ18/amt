@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
-
 @Service
 public class UserService {
 
@@ -19,7 +17,7 @@ public class UserService {
     public ResponseEntity<UserModel> postUser(String email, String password) {
         UserModel usermodel = new UserModel();
 
-        if(userRepository.existsByEmail(email)) {
+        if(userRepository.findByEmail(email).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }else {
             usermodel.email = email;
@@ -32,14 +30,14 @@ public class UserService {
     public Boolean findByEmailAndPassword(String email, String password) {
 
         boolean status = false;
-        if(userRepository.existsByEmail(email)) {
-            if(userRepository.existsByPassword(password)) status = true;
+        if(userRepository.findByEmail(email).isPresent()) {
+            if(userRepository.findByPassword(password).isPresent()) status = true;
         }
         return status;
     }
 
     public String deleteUserByEmailAndPassword(Long id, String email) {
-        if(userRepository.existsByEmail(email)) userRepository.deleteById(id);
+        if(userRepository.findByEmail(email).isPresent()) userRepository.deleteById(id);
         else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return "Deleted User Successfully";
     }

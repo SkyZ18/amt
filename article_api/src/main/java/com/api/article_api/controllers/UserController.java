@@ -2,15 +2,17 @@ package com.api.article_api.controllers;
 
 import com.api.article_api.models.UserModel;
 import com.api.article_api.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/users/register/{email}&{password}")
     private ResponseEntity<UserModel> createUser(@PathVariable("email") String email, @PathVariable("password") String password) {

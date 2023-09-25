@@ -9,15 +9,15 @@ export class CardGetIdComponent {
 
   data: any;
 
-  error = {"name" : "---", "description" : "---", "quantity" : "none"};
+  error = {"name" : "---", "description" : "---", "quantity" : "---"};
 
-  none = {"name" : "", "description" : "", "quantity" : ""};
+  none = {"name" : "---", "description" : "---", "quantity" : "---"};
 
   async submit(id_s: string) {
 
     let id: number = +id_s;
     
-    const response = await fetch(`http://localhost:8080/articles/${id}`, {
+    const response = await fetch(`http://localhost:8080/api/v1/articles/${id}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',

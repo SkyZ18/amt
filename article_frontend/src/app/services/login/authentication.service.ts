@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   async authenticate(email: string, password: string) {
     
-    const response = await fetch(`http://localhost:8080/users/login/${email}&${password}`, {
+    const response = await fetch(`http://localhost:8080/api/v1/users/login/${email}&${password}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',

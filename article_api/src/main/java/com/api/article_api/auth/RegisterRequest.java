@@ -1,4 +1,4 @@
-package com.api.article_api.controllers;
+package com.api.article_api.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -18,7 +18,7 @@ export class CardPostArticleComponent {
 
     if(name && description != "") {
 
-      fetch(`http://localhost:8080/articles/${name}&${description}&${quantity}`, {
+      fetch(`http://localhost:8080/api/v1/articles/${name}&${description}&${quantity}`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

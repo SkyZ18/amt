@@ -17,7 +17,7 @@ services:
     networks:
       - article-network
   frontend:
-    container_name: article_frontend
+    container_name: amt_frontend
     build:
       context: article_frontend/.
       dockerfile: Dockerfile
@@ -29,7 +29,7 @@ services:
     networks:
       - article-network
   backend:
-    container_name: article_backend
+    container_name: amt-api
     build:
       context: article_api/.
       dockerfile: Dockerfile

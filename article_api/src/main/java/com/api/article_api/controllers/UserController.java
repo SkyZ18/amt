@@ -1,7 +1,6 @@
 package com.api.article_api.controllers;
 
 import com.api.article_api.models.UserModel;
-import com.api.article_api.services.AuthenticationService;
 import com.api.article_api.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

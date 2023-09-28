@@ -2,6 +2,7 @@ package com.api.article_api.services;
 
 import com.api.article_api.models.ArticleModel;
 import com.api.article_api.repositories.ArticleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ArticleService {
 
-    @Autowired
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
 
     public ResponseEntity<List<ArticleModel>> getArticles() {
         return ResponseEntity.ok(articleRepository.findAll());

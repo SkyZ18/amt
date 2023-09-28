@@ -6,13 +6,21 @@ This is a simple article management tool. You can add your articles to a Databas
 > [!IMPORTANT]
 > For this to work install Docker and Git
 
-First Download the Project as a .zip and extract it to a Folder of your choise.
-After this you can open the Terminal of your Device || open the Folder in the IDE you wish.
+### Git
+
+First run the Git command in a Folder of your choice:
+```
+git clone https://github.com/SkyZ18/amt.git
+```
+After this you can cd into the Project and run the Docker commands.
+
+### Download .zip
+If you want to download the .zip file, go to https://github.com/SkyZ18/amt/archive/refs/heads/main.zip and save the .zip in a Folder of your choise. Then just extract it with 7Zip or WinRar.
 
 ### Docker
-To initialize the Project, open Docker and run these in the rootfolder AMT:
+To initialize the Project, open Docker and run these in the rootfolder cli of AMT:
 ```
 docker-compose build
 docker-compose up
 ```
-Check if the Container is running and call the URL **http://localhost:80/** 
+Check if the Containers are running and call the URL **http://localhost:80/** for the Frontend view.

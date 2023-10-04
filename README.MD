@@ -12,6 +12,13 @@ Verify that you have Node installed and run the command below:
 node -v
 ```
 
+https://nodejs.org/de/download
+
+Mac:
+```
+brew install node
+```
+
 ### Git
 First run the Git command in a Folder of your choice:
 ```

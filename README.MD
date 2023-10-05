@@ -11,10 +11,11 @@ Verify that you have Node installed and run the command below:
 ```
 node -v
 ```
+If not installed, install it for Windows:
 
 https://nodejs.org/de/download
 
-Mac:
+Or on Mac via Homebrew:
 ```
 brew install node
 ```
@@ -39,7 +40,7 @@ mvn -v
 ```
 If Maven is not installed, follow this install guide for Windows: https://www.javatpoint.com/how-to-install-maven
 
-If you are on Mac, install Homebrew and run:
+If you are on Mac, run this:
 ```
 brew install maven
 ```
@@ -48,7 +49,7 @@ brew install maven
 If you want to download the .zip file, go to https://github.com/SkyZ18/amt/archive/refs/heads/main.zip and save the .zip in a Folder of your choise. Then just extract it with 7Zip or WinRar and Follow the process above.
 
 ### Docker
-After you ran the Package, initialize the Project. Open Docker and run these in the rootfolder cli of AMT:
+After you ran the Maven Package, initialize the Project. Open Docker and run these in the rootfolder cli of AMT:
 ```
 docker-compose build
 docker-compose up

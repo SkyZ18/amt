@@ -15,7 +15,7 @@ git clone https://github.com/SkyZ18/amt.git
 After this you can cd into the Project and run the Docker commands.
 
 ### Download .zip
-If you want to download the .zip file, go to https://github.com/SkyZ18/amt/archive/refs/heads/main.zip and save the .zip in a Folder of your choise. Then just extract it with 7Zip or WinRar.
+If you want to download the .zip file, go to https://github.com/SkyZ18/amt/archive/refs/heads/main.zip and save the .zip in a Folder of your choise. Then just extract it with 7Zip or WinRar. Also you can download the Sourcecode from the listed Releases.
 
 ### Docker
 To initialize the Project, open Docker and run these in the rootfolder cli of AMT:

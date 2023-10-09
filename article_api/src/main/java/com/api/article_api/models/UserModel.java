@@ -1,5 +1,6 @@
 package com.api.article_api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +28,7 @@ public class UserModel {
     @Column(name = "email", unique = true)
     public String email;
 
+    @JsonIgnore
     @Column(name = "password")
     public String password;
 

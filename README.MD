@@ -6,6 +6,7 @@ This is a simple article management tool. You can add your articles to a Databas
 > [!IMPORTANT]
 > For this to work install Docker, Git, Node and Maven
 
+
 ### First Step
 Verify that you have Node installed and run the command below:
 ```
@@ -19,7 +20,7 @@ Or on Mac via Homebrew:
 ```
 brew install node
 ```
-
+---
 ### Git
 First run the Git command in a Folder of your choice:
 ```
@@ -48,6 +49,7 @@ brew install maven
 ### Download .zip
 If you want to download the .zip file, go to https://github.com/SkyZ18/amt/archive/refs/heads/main.zip and save the .zip in a Folder of your choise. Then just extract it with 7Zip or WinRar and Follow the process above.
 
+---
 ### Docker
 After you ran the Maven Package, initialize the Project. Open Docker and run these in the rootfolder cli of AMT:
 ```

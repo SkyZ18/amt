@@ -13,23 +13,28 @@ export class AuthenticationService {
   ){}
 
   async authenticate(email: string, password: string) {
-    
-    const response = await fetch(`http://localhost:8080/api/v1/users/login/${email}&${password}`, {
-      method: 'GET',
+
+    const response = await fetch(`http://localhost:8080/api/v1/auth/login`, {
+      method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
+      body: JSON.stringify({
+        "email": email,
+        "password": password
+      })
     });
 
-    
+
     this.data = await response.json();
 
-    if(this.data == true) {
+    if(this.data != null) {
 
       let result = this.generateToken();
-      
+
       localStorage.setItem("token", result);
-      this.router.navigateByUrl('/home')
+      await this.router.navigateByUrl('/home')
     }else {
       console.log("Error while Authenticating");
     }
@@ -52,9 +57,7 @@ export class AuthenticationService {
   }
 
   isUserLoggedIn(): boolean {
-    if (localStorage.getItem("token") != null) {
-      return true;
-    }
-    return false;
+    return localStorage.getItem("token") != null;
+
   }
 }

@@ -3,8 +3,8 @@ package com.api.article_api.services;
 import com.api.article_api.models.ArticleModel;
 import com.api.article_api.repositories.ArticleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,10 +30,12 @@ public class ArticleService {
         return ResponseEntity.ok(articleRepository.save(articleModel));
     }
 
-    public String deleteArticleById(Long id) {
-        if(articleRepository.existsById(id)) articleRepository.deleteById(id);
-        else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return "Deleted Successfully";
+    public HttpStatusCode deleteArticleById(Long id) {
+        if(articleRepository.existsById(id)) {
+            articleRepository.deleteById(id);
+            return HttpStatus.ACCEPTED;
+        }
+        else return HttpStatus.NOT_FOUND;
     }
 
     public Optional<ArticleModel> updateArticleById(Long id, ArticleModel articleModel) {

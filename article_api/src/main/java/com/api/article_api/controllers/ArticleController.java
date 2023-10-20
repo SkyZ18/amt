@@ -3,6 +3,7 @@ package com.api.article_api.controllers;
 import com.api.article_api.models.ArticleModel;
 import com.api.article_api.services.ArticleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteArticle(@PathVariable("id") Long id) {
+    public HttpStatusCode deleteArticle(@PathVariable("id") Long id) {
         return articleService.deleteArticleById(id);
     }
 

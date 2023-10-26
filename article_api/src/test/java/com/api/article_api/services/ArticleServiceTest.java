@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -44,9 +46,35 @@ class ArticleServiceTest {
     }
 
     @Test
+    public void findArticleInDatabaseWithId() {
+        Optional<ArticleModel> expected = Optional.ofNullable(articleModel);
+        Optional<ArticleModel> actual = articleRepository.findById(articleModel.getId());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnNullWhenFindById() {
+        Optional<ArticleModel> expected = Optional.empty();
+        Optional<ArticleModel> actual = articleRepository.findById(1L);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void createNewArticleWithParameter() {
-        HttpStatusCode expected = HttpStatus.OK;
-        HttpStatusCode actual = articleService.saveArticle(articleModel).getStatusCode();
+        HttpStatusCode expected = HttpStatus.CREATED;
+        HttpStatusCode actual = articleService.postArticleWithParameter(articleModel);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenMissingInput() {
+        HttpStatusCode expected = HttpStatus.BAD_REQUEST;
+        ArticleModel articleModel1 = ArticleModel.builder()
+                .name("")
+                .description("This is a Test")
+                .quantity(0L)
+                .build();
+        HttpStatusCode actual = articleService.postArticleWithParameter(articleModel1);
         assertEquals(expected, actual);
     }
 
@@ -62,6 +90,10 @@ class ArticleServiceTest {
         HttpStatusCode expected = HttpStatus.NOT_FOUND;
         HttpStatusCode actual = articleService.deleteArticleById(1L);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void replaceNewData() {
     }
 
     @AfterEach

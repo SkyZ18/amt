@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.Optional;
@@ -17,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ArticleServiceTest {
-
     String TEST_NAME = "TEST";
+    String TEST_NAME_CHANGE = "TEST2";
     String TEST_DESCRIPTION = "This is a test";
     Long TEST_QUANTITY = 1L;
 
@@ -94,6 +95,21 @@ class ArticleServiceTest {
 
     @Test
     public void replaceNewData() {
+        HttpStatusCode expected = HttpStatus.ACCEPTED;
+        articleModel.setName(TEST_NAME_CHANGE);
+        HttpStatusCode actual = articleService.updateArticleById(articleModel.getId(), articleModel);
+        Optional<ArticleModel> nameTest = articleRepository.findById(articleModel.getId());
+        assertEquals(expected, actual);
+        nameTest.ifPresent(model -> assertEquals(articleModel, model));
+    }
+
+    @Test
+    public void shouldThrowErrorWhenNotFound() {
+        HttpStatusCode expected = HttpStatus.NOT_FOUND;
+        articleModel.setName(TEST_NAME_CHANGE);
+        HttpStatusCode actual = articleService.updateArticleById(1L, articleModel);
+        assertEquals(expected, actual);
+
     }
 
     @AfterEach

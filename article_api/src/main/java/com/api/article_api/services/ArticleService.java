@@ -35,13 +35,12 @@ public class ArticleService {
         else return HttpStatus.NOT_FOUND;
     }
 
-    public Optional<ArticleModel> updateArticleById(Long id, ArticleModel articleModel) {
+    public HttpStatusCode updateArticleById(Long id, ArticleModel articleModel) {
         if(articleRepository.existsById(id)) {
             articleModel.id = id;
             articleRepository.save(articleModel);
-        } else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        return Optional.of(articleModel);
+            return HttpStatus.ACCEPTED;
+        } else return HttpStatus.NOT_FOUND;
     }
 
     public HttpStatusCode postArticleWithParameter(ArticleModel articleModel) {
@@ -53,9 +52,7 @@ public class ArticleService {
         {
             articleRepository.save(articleModel);
             return HttpStatus.CREATED;
-        } else {
-            return HttpStatus.BAD_REQUEST;
-        }
+        } else return HttpStatus.BAD_REQUEST;
     }
 
     public HttpStatusCode deleteAllDataInDatabase() {

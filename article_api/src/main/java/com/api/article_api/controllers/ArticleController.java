@@ -39,7 +39,7 @@ public class ArticleController {
     }
 
     @PutMapping("/update/{id}")
-    public Optional<ArticleModel> updateArticle(@PathVariable("id") Long id, @RequestBody ArticleModel articleModel) {
+    public HttpStatusCode updateArticle(@PathVariable("id") Long id, @RequestBody ArticleModel articleModel) {
         return articleService.updateArticleById(id, articleModel);
     }
 

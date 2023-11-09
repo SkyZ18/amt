@@ -14,16 +14,12 @@ import lombok.*;
 public class ArticleModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "article_id")
+    @GeneratedValue
     public Long id;
 
-    @Column(name = "article_name")
     public String name;
 
-    @Column(name = "article_description")
     public String description;
 
-    @Column(name = "article_quantity")
     public Long quantity;
 }

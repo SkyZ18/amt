@@ -28,9 +28,9 @@ public class ArticleController {
         return articleService.findArticleById(id);
     }
 
-    @PostMapping("/{name}&{description}&{quantity}")
-    public ResponseEntity<ArticleModel> postArticle(@PathVariable("name") String name, @PathVariable("description") String description, @PathVariable("quantity") Long quantity) {
-        return articleService.postArticleWithParameter(name, description, quantity);
+    @GetMapping("/createArticle")
+    public HttpStatusCode postArticle(@RequestBody ArticleModel articleModel) {
+        return articleService.postArticleWithParameter(articleModel);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -39,7 +39,12 @@ public class ArticleController {
     }
 
     @PutMapping("/update/{id}")
-    public Optional<ArticleModel> updateArticle(@PathVariable("id") Long id, @RequestBody ArticleModel articleModel) {
+    public HttpStatusCode updateArticle(@PathVariable("id") Long id, @RequestBody ArticleModel articleModel) {
         return articleService.updateArticleById(id, articleModel);
+    }
+
+    @DeleteMapping("/deleteAll")
+    public HttpStatusCode deleteAllData() {
+        return articleService.deleteAllDataInDatabase();
     }
 }

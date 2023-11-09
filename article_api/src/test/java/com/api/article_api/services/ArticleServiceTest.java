@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.web.server.ResponseStatusException;
 
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ArticleServiceTest {
-
     String TEST_NAME = "TEST";
+    String TEST_NAME_CHANGE = "TEST2";
     String TEST_DESCRIPTION = "This is a test";
     Long TEST_QUANTITY = 1L;
 
@@ -44,9 +47,35 @@ class ArticleServiceTest {
     }
 
     @Test
+    public void findArticleInDatabaseWithId() {
+        Optional<ArticleModel> expected = Optional.ofNullable(articleModel);
+        Optional<ArticleModel> actual = articleRepository.findById(articleModel.getId());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnNullWhenFindById() {
+        Optional<ArticleModel> expected = Optional.empty();
+        Optional<ArticleModel> actual = articleRepository.findById(1L);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void createNewArticleWithParameter() {
-        HttpStatusCode expected = HttpStatus.OK;
-        HttpStatusCode actual = articleService.saveArticle(articleModel).getStatusCode();
+        HttpStatusCode expected = HttpStatus.CREATED;
+        HttpStatusCode actual = articleService.postArticleWithParameter(articleModel);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenMissingInput() {
+        HttpStatusCode expected = HttpStatus.BAD_REQUEST;
+        ArticleModel articleModel1 = ArticleModel.builder()
+                .name("")
+                .description("This is a Test")
+                .quantity(0L)
+                .build();
+        HttpStatusCode actual = articleService.postArticleWithParameter(articleModel1);
         assertEquals(expected, actual);
     }
 
@@ -62,6 +91,25 @@ class ArticleServiceTest {
         HttpStatusCode expected = HttpStatus.NOT_FOUND;
         HttpStatusCode actual = articleService.deleteArticleById(1L);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void replaceNewData() {
+        HttpStatusCode expected = HttpStatus.ACCEPTED;
+        articleModel.setName(TEST_NAME_CHANGE);
+        HttpStatusCode actual = articleService.updateArticleById(articleModel.getId(), articleModel);
+        Optional<ArticleModel> nameTest = articleRepository.findById(articleModel.getId());
+        assertEquals(expected, actual);
+        nameTest.ifPresent(model -> assertEquals(articleModel, model));
+    }
+
+    @Test
+    public void shouldThrowErrorWhenNotFound() {
+        HttpStatusCode expected = HttpStatus.NOT_FOUND;
+        articleModel.setName(TEST_NAME_CHANGE);
+        HttpStatusCode actual = articleService.updateArticleById(1L, articleModel);
+        assertEquals(expected, actual);
+
     }
 
     @AfterEach

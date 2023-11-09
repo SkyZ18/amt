@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -26,10 +27,6 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
-    public ResponseEntity<ArticleModel> saveArticle(ArticleModel articleModel) {
-        return ResponseEntity.ok(articleRepository.save(articleModel));
-    }
-
     public HttpStatusCode deleteArticleById(Long id) {
         if(articleRepository.existsById(id)) {
             articleRepository.deleteById(id);
@@ -38,23 +35,29 @@ public class ArticleService {
         else return HttpStatus.NOT_FOUND;
     }
 
-    public Optional<ArticleModel> updateArticleById(Long id, ArticleModel articleModel) {
+    public HttpStatusCode updateArticleById(Long id, ArticleModel articleModel) {
         if(articleRepository.existsById(id)) {
             articleModel.id = id;
             articleRepository.save(articleModel);
-        } else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        return Optional.of(articleModel);
+            return HttpStatus.ACCEPTED;
+        } else return HttpStatus.NOT_FOUND;
     }
 
-    public ResponseEntity<ArticleModel> postArticleWithParameter(String name, String description, Long quantity) {
-        ArticleModel articleModel = new ArticleModel();
+    public HttpStatusCode postArticleWithParameter(ArticleModel articleModel) {
+        if(
+                articleModel.getId() != null
+                && !Objects.equals(articleModel.getName(), "")
+                && !Objects.equals(articleModel.getDescription(), "")
+                && articleModel.getQuantity() != null)
+        {
+            articleRepository.save(articleModel);
+            return HttpStatus.CREATED;
+        } else return HttpStatus.BAD_REQUEST;
+    }
 
-        articleModel.name = name;
-        articleModel.description = description;
-        articleModel.quantity = quantity;
-
-        return ResponseEntity.ok(articleRepository.save(articleModel));
+    public HttpStatusCode deleteAllDataInDatabase() {
+        articleRepository.deleteAll();
+        return HttpStatus.OK;
     }
 
 }

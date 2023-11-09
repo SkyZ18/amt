@@ -1,5 +1,6 @@
 package com.api.article_api.models;
 
+import com.api.article_api.token.Token;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,20 +22,19 @@ import java.util.List;
 public class UserModel implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @GeneratedValue
     public Long id;
 
-    @Column(name = "email", unique = true)
     public String email;
 
     @JsonIgnore
-    @Column(name = "password")
     public String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     public Role role;
+
+    @OneToMany(mappedBy = "userModel")
+    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
